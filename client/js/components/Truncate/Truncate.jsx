@@ -12,6 +12,7 @@ const defaultProps = {
 
 const Truncate = props => {
   const { text, maxLength } = props;
+
   const [isHidden, setIsHidden] = useState(false);
 
   return (
