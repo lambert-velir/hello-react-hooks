@@ -43,13 +43,13 @@ module.exports = function runSassTask(userConfig = {}) {
 
     // the order matters
     postcssPlugins: [
-      postcssPresetEnv(userConfig.postcssPresetEnv || { stage: 3 }),
       autoprefixer(
         userConfig.autoprefixer || {
-          browsers: ["> 0.5%", "last 2 versions", "Firefox ESR", "ie >= 11"],
-          grid: true
+          // browsers:  browser list is defined in .browserlistrc
+          grid: "autoplace"
         }
-      )
+      ),
+      postcssPresetEnv(userConfig.postcssPresetEnv || { stage: 3 })
     ],
 
     postcssOptions: {}

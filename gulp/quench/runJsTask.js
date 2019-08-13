@@ -14,6 +14,7 @@ const findup = require("find-up");
 const detective = require("detective-es6");
 const path = require("path");
 const fs = require("fs");
+const glob = require("glob");
 const R = require("ramda");
 const findBabelConfig = require("find-babel-config");
 
@@ -65,12 +66,14 @@ module.exports = function runJsTask(userConfig) {
     );
   }
 
+  const files = resolveEntryGlobs(config.files);
+
   // a function to look in all the files to find what npm packages are being used
-  const getNpmPackages = createNpmPackagesGetter(config.files, libraries);
+  const getNpmPackages = createNpmPackagesGetter(files, libraries);
 
   /* 1. Create a gulp task and watcher for each file in the files array */
 
-  const fileTasks = config.files.map(fileConfig => {
+  const fileTasks = files.map(fileConfig => {
     if (!fileConfig.entry || !fileConfig.filename) {
       quench.throwError(
         "Js task requires that each file has an entry and a filename!\n",
@@ -180,6 +183,37 @@ module.exports = function runJsTask(userConfig) {
 };
 
 /**
+ * the entry path can be in glob format.  This function will ensure that the glob
+ * only matches one file
+ * @param  {Array} files : fileConfig objects from config (above)
+ * @return {Array} files with globs resolved to a single file
+ * @throws if the glob doesn't match exactly one file
+ */
+function resolveEntryGlobs(files) {
+  return R.map(file => {
+    // entry could be in glob syntax, eg. "index.js?(x)"
+    const globPath = file.entry;
+    const matches = glob.sync(globPath);
+
+    if (matches.length === 0) {
+      quench.throwError(
+        "runJsTask: No files were found that matches the glob:\n",
+        `  ${globPath}\n`
+      );
+    }
+    else if (matches.length > 1) {
+      quench.throwError(
+        "runJsTask: More than one file was found for the glob: \n",
+        `  ${globPath}\n\n`,
+        "  The javascript 'entry' field should match only one file."
+      );
+    }
+    // will only compile the first one
+    return R.assoc("entry", matches[0], file);
+  })(files);
+}
+
+/**
  * factory function to return "getNpmPackages"
  * eg. const getNpmPackages = createNpmPackagesGetter(config.files, libraries);
  * @param  {Array} files - Array of file objects (see config.files) (object with .entry key)
@@ -236,8 +270,7 @@ function bundleJs(browserifyOptions, npmPackages) {
     const b = browserify(browserifyOptions || {}) // pass options
       .add(file.path) // this file
       .transform(babelify, {
-        global: true,
-        plugins: ["@babel/plugin-transform-arrow-functions"]
+        global: true
       }); // babel config should be in .babelrc
 
     // externalize common packages

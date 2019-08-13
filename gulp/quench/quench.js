@@ -1,6 +1,6 @@
 /**
  *    Quench: utilities for gulp builds
- *    v5.2.0
+ *    v5.5.2
  *
  * Exposed functions: (see function comments for more details)
  *   setDefaults
@@ -69,8 +69,6 @@ environments.forEach(function(environment) {
   env[environment] = env.make(environment);
 });
 
-setEnv(yargs.argv.env);
-
 /**
  * set the environment
  * @param {String} _env the environment to use
@@ -114,7 +112,7 @@ module.exports.setDefaults = function setDefaults(lookup) {
 
   // make sure all the given keys are in the yargOptions
   const valid = R.compose(
-    R.all(R.contains(R.__, validArgs)),
+    R.all(R.includes(R.__, validArgs)),
     R.keys
   )(lookup);
 
@@ -145,6 +143,9 @@ module.exports.loadLocalJs = function loadLocalJs() {
  * @return {Function} an instance of gulp-environments
  */
 module.exports.getEnv = function getEnv() {
+  // make sure the environment is set first, setEnv will abort if it's already set
+  setEnv(yargs.argv.env);
+
   return env;
 };
 
@@ -237,15 +238,26 @@ module.exports.logHelp = function logHelp(cb) {
   const code = chalk.yellow;
 
   console.log("");
-  console.log("Available commands: ");
+  console.log(`Available gulp ${chalk.cyan("<task>")} commands: `);
   console.log("");
 
-  gulp
-    .tree()
-    .nodes.filter(taskName => taskName !== "default")
-    .forEach(taskName => {
-      console.log(indent, code(`gulp ${taskName}`));
-    });
+  R.compose(
+    R.forEach(task => {
+      const { displayName, description } = task;
+      console.log(indent, chalk.cyan(displayName));
+
+      if (description) {
+        console.log(indent, indent, description);
+      }
+    }),
+    R.filter(task => task.displayName !== "default"),
+    R.map(task => {
+      const description = task.unwrap().description;
+      const displayName = task.displayName;
+      return { displayName, description };
+    }),
+    R.values
+  )(gulp.registry().tasks());
 
   console.log("");
   console.log("");
@@ -270,8 +282,20 @@ module.exports.logHelp = function logHelp(cb) {
 
   console.log("");
 
-  console.log("eg. a common command for building projects for Jenkins, etc:");
-  console.log(indent, code("gulp build --no-watch --env production"));
+  console.log(chalk.bold("Continuous integration"));
+  console.log(
+    indent,
+    "To avoid relying on the global gulp, it can be run from node_modules."
+  );
+  console.log(
+    indent,
+    "A common command for building projects for Jenkins, etc:"
+  );
+  console.log(
+    indent,
+    indent,
+    code("node_modules/.bin/gulp build --no-watch --env production")
+  );
 
   console.log("");
   console.log("");

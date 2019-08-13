@@ -4,18 +4,26 @@ const chalk = require("chalk");
 const browserSync = require("browser-sync");
 
 module.exports = function runBrowserSyncTask(userConfig = {}) {
-  const localConfig = quench.loadLocalJs();
+  const localJs = quench.loadLocalJs();
 
-  if (!userConfig.server && !userConfig.proxy && !localConfig.proxy) {
-    quench.throwError(
-      "Browser-sync requires a `server` path or `proxy` in userConfig, or a `proxy` defined in local.js!\n",
-      `Was given userConfig: ${JSON.stringify(userConfig, null, 2)}\n`,
-      `and config from local.js: ${JSON.stringify(localConfig, null, 2)}`
+  if (!userConfig.server && !userConfig.proxy && !localJs.proxy) {
+    quench.logYellow(
+      "WARNING!",
+      chalk.red("Browsersync was called but is not running!"),
+      `Did you mean to add the ${chalk.cyan("--no-watch")} flag? \n\n`,
+      `If not, make sure your provided a ${chalk.cyan("server")} path`,
+      `or ${chalk.cyan("proxy")} in userConfig,`,
+      `or a ${chalk.cyan("proxy")} defined in local.js!\n\n`,
+      "userConfig passed to runBrowserSyncTask:",
+      `${JSON.stringify(userConfig, null, 2)}\n`,
+      `and config from local.js: ${JSON.stringify(localJs, null, 2)}`
     );
+
+    return;
   }
 
   const defaults = {
-    port: localConfig.browserSyncPort || 3000,
+    port: localJs.browserSyncPort || userConfig.port || 3000,
     open: false, // false or  "external"
     notify: false,
     ghostMode: false,
@@ -33,39 +41,71 @@ module.exports = function runBrowserSyncTask(userConfig = {}) {
 
     // set the server root, or proxy if it's set in local.js
     // use proxy if you have a server running the site already (eg, IIS)
+    // or if you want to proxy a dev server
     // http://www.browsersync.io/docs/options/#option-proxy
-    proxy: localConfig.proxy || userConfig.proxy || undefined
+    proxy: localJs.proxy || userConfig.proxy || undefined,
+
+    // use this if you want to proxy a dev server and serve certain files from
+    // your local machine. eg:
+    //   "serveStatic": [{
+    //     "route": "/styles",
+    //     "dir": "/path/to/project/styles"
+    //   }]
+    // https://browsersync.io/docs/options#option-serveStatic
+    serveStatic: []
+
+    // https://browsersync.io/docs/options#option-serveStaticOptions
+    // serveStaticOptions: {}
 
     // if not using proxy, use userConfig.server as the server root
     // http://www.browsersync.io/docs/options/#option-server
+    // server: "path/to/build/"
   };
 
-  // proxy is taken care of in the defaults
+  // proxy/port is taken care of in the defaults
   const browserSyncSettings = R.mergeDeepRight(
     defaults,
-    R.omit(["proxy"], userConfig)
+    R.omit(["proxy", "port"], userConfig)
   );
 
   // only run browser-sync if we're also watching
   if (quench.isWatching()) {
-    quench.logYellow(
-      "watching",
-      "browserSync:",
-      JSON.stringify(browserSyncSettings.files, null, 2)
-    );
-
-    try {
-      // returning a promise https://gulpjs.com/docs/en/getting-started/async-completion
-      return new Promise((resolve, reject) => {
-        browserSync.create().init(browserSyncSettings, resolve);
-      });
-    }
-    catch (e) {
-      quench.throwError(
-        "There was an error starting browser sync.  Is there something wrong with your settings?\n ",
-        "browserSyncSettings: ",
-        chalk.white(JSON.stringify(browserSyncSettings, null, 2))
+    // don't fail if files isn't defined
+    if (browserSyncSettings.files) {
+      quench.logYellow(
+        "watching",
+        "browserSync:",
+        JSON.stringify(browserSyncSettings.files, null, 2)
       );
     }
+
+    const handleError = error => {
+      quench.throwError(
+        "There was an error starting browser sync.  Is there something wrong with your settings?\n ",
+        chalk.white("browserSyncSettings: "),
+        chalk.white(JSON.stringify(browserSyncSettings, null, 2)),
+        "\n\n",
+        error,
+        "\n"
+      );
+    };
+    try {
+      // returning a promise for gulp 4
+      // https://gulpjs.com/docs/en/getting-started/async-completion
+      return new Promise((resolve, reject) => {
+        const bs = browserSync.create();
+        bs.init(browserSyncSettings, () => resolve(bs));
+      }).catch(handleError);
+    }
+    catch (error) {
+      handleError(error);
+    }
+  }
+  else {
+    quench.logYellow(
+      "WARNING!",
+      chalk.red("Browsersync task was called, but watch is false.")
+    );
+    return Promise.resolve();
   }
 };
