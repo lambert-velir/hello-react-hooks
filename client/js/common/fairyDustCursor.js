@@ -66,8 +66,8 @@ function unbindEvents() {
 }
 
 function onMouseMove(e) {
-  cursor.x = e.clientX;
-  cursor.y = e.clientY;
+  cursor.x = e.clientX + window.scrollX;
+  cursor.y = e.clientY + window.scrollY;
 
   addParticle(
     cursor.x,
@@ -110,7 +110,7 @@ function Particle() {
     display: "block",
     pointerEvents: "none",
     "z-index": "10000000",
-    fontSize: "24px",
+    fontSize: "48px",
     "will-change": "transform"
   };
 

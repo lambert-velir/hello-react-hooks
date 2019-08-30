@@ -1,0 +1,37 @@
+.meme {
+  position: relative;
+  display: inline-block;
+  margin: auto;
+  pointer-events: none;
+  user-select: none;
+
+  img {
+    max-width: 100%;
+    width: 800px;
+  }
+}
+
+.meme__text-top,
+.meme__text-bottom {
+        color: white;
+  font-size: 40px;
+  font-weight: bold;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+    1px 1px 0 #000;
+}
+
+.meme__text-top {
+  position: absolute;
+  top: 12px;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+
+.meme__text-bottom {
+  position: absolute;
+  bottom: 50px;
+  left: 0;
+  right: 0;
+  text-align: center;
+}

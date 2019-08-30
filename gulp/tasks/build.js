@@ -11,7 +11,7 @@ module.exports = function createBuildTasks(projectRoot) {
 
   const copy = () =>
     runCopyTask({
-      src: [`${clientDir}/index.html`],
+      src: [`${clientDir}/index.html`, `${clientDir}/img/**`],
       dest: buildDir,
       base: `${clientDir}`
     });

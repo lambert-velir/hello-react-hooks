@@ -1,22 +1,19 @@
 import React, { useEffect } from "react";
 
-import fairyDustCursor from "./fairyDustCursor.js";
-import useMouseDown from "./useMouseDown.js";
+import fairyDustCursor from "../../common/fairyDustCursor.js";
+import useMouseDown from "../../common/useMouseDown.js";
 
 const propTypes = {};
 
 const FairyDust = props => {
   const isMouseDown = useMouseDown();
 
-  useEffect(
-    () => {
-      if (isMouseDown) {
-        fairyDustCursor.init();
-        return () => fairyDustCursor.destroy();
-      }
-    },
-    [isMouseDown]
-  );
+  useEffect(() => {
+    if (isMouseDown) {
+      fairyDustCursor.init();
+      return () => fairyDustCursor.destroy();
+    }
+  }, [isMouseDown]);
 
   return <div>the mouse is {isMouseDown ? "DOWN" : "UP"}!</div>;
 };
