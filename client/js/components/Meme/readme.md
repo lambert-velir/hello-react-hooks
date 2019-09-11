@@ -10,7 +10,7 @@ _Task:_ Add the ability to change the text with the `<input />`.
 - Make the input a _controlled component_.
   - By giving the `<input />` a `value` and `onChange` prop.
   - https://reactjs.org/docs/forms.html#controlled-components
-- Render the value of the input in the `meme__text-top` div.
+- Render the value of the input in the `meme__text-top` div so it's shown on the meme.
   ```javascript
   <div className="meme__text-top">
   ```
@@ -27,7 +27,7 @@ _Task:_ Add another input for the bottom text and render in a new div.
 ```
 
 ```javascript
-  <div className="meme__text-bottom">
+<div className="meme__text-bottom">
 ```
 
 #### 3. **useEffect**
@@ -38,7 +38,7 @@ _Task:_ Save the top/bottom text values to `localStorage`.
   import React, { useEffect, useState } from "react";
   ```
 - https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
-- Make sure to initialize the text states from `localStorage`.
+- Make sure to initialize the text states from `localStorage` so they persist when the page is refreshed.
   - https://reactjs.org/docs/hooks-reference.html#usestate
 
 #### 4. **useState** + **useEffect**
