@@ -1,0 +1,29 @@
+.meme-editor {
+  max-width: 800px;
+}
+
+.meme-editor__controls {
+  // -12px for label spacing
+  margin: 12px -12px;
+
+  // 12px needed to absorb in to the -12px in parent
+  label {
+    display: block;
+    margin: 6px 12px;
+  }
+
+  input {
+    padding: 10px;
+    font-size: 18px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  @media (min-width: 400px) {
+    display: flex;
+
+    > * {
+      flex: auto;
+    }
+  }
+}

@@ -3,39 +3,63 @@ import React from "react";
 const Notes = props => {
   return (
     <div>
-      <h2>Todo app</h2>
+      <h2>Meme App</h2>
 
-      <h2>State</h2>
+      <ol>
+        <li>
+          <strong>useState</strong> - Top text input
+        </li>
+        <li>
+          <strong>2nd useState</strong> - Bottom text input
+        </li>
+        <li>
+          <strong>useEffect - no cleanup</strong> - Save to localStorage
+        </li>
+        <li>
+          <strong>useEffect - cleanup</strong> - is mouse down
+          (useState/useEffect)
+        </li>
+        <li>
+          <strong>custom hook</strong> - useMouseDown
+        </li>
+        <li>
+          <strong>Bonus</strong> - fairy dust on mouse down
+        </li>
+      </ol>
+
+      {/* <h2>Ideas</h2>
+
+      <h3>State</h3>
       <ul>
         <li>Counter &lt;&lt; lesson</li>
         <li>text input (form) &lt;&lt; exercise</li>
         <li>truncate?</li>
       </ul>
 
-      <h2>Multiple useState calls</h2>
+      <h3>Multiple useState calls</h3>
       <ul>
         <li>Counter increment amount &lt;&lt; lesson</li>
         <li>lastname of form &lt;&lt; exercise</li>
       </ul>
 
-      <h2>Effects - no clean up</h2>
+      <h3>Effects - no clean up</h3>
       <ul>
         <li>document.title (name from form) &lt;&lt; exercise</li>
         <li>local storage</li>
         <li>fetch data?</li>
       </ul>
 
-      <h2>Effects - clean up</h2>
+      <h3>Effects - clean up</h3>
       <ul>
         <li>fairy dust &lt;&lt; exercise</li>
         <li>resize listener?</li>
       </ul>
 
-      <h2>Custom hooks</h2>
+      <h3>Custom hooks</h3>
       <ul>
         <li>getWindowWidth</li>
         <li>useMouseDown</li>
-      </ul>
+      </ul> */}
     </div>
   );
 };

@@ -4,22 +4,39 @@
   margin: auto;
   pointer-events: none;
   user-select: none;
+  transition: all 5000ms;
 
   img {
     max-width: 100%;
     width: 800px;
   }
+
+  @keyframes trippy {
+    0% {
+      filter: hue-rotate(0deg);
+    }
+
+    100% {
+      filter: hue-rotate(360deg);
+    }
+  }
+
+  &.meme--trippy {
+    animation: trippy 2000ms infinite;
+  }
 }
 
+.meme__text,
 .meme__text-top,
 .meme__text-bottom {
-        color: white;
+  color: white;
   font-size: 40px;
   font-weight: bold;
   text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
     1px 1px 0 #000;
 }
 
+.meme__text,
 .meme__text-top {
   position: absolute;
   top: 12px;

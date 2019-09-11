@@ -55,7 +55,6 @@ rules:
     - 0 # disabled for now
     - ignore-custom-properties: false
       order:
-
         # box
         - position
         - top
