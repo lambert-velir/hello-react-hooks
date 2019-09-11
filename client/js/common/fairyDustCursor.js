@@ -9,7 +9,7 @@ const possibleColors = ["#D61C59", "#E7D84B", "#1B8798"];
 let cursor = { x: 0, y: 0 };
 const particles = [];
 let shouldRun = false;
-const DEBUG = true;
+const DEBUG = false;
 let rafId = null;
 
 function log(...args) {
@@ -17,18 +17,21 @@ function log(...args) {
 }
 
 function init() {
-  // make sure we don't rAF more than once
-  window.cancelAnimationFrame(rafId);
   if (shouldRun === true) {
     // stop();
-    console.error("You already have fairy dust!");
+    console.warn("You already have fairy dust!");
   }
   else {
+    // make sure we don't rAF more than once
+    window.cancelAnimationFrame(rafId);
     start();
   }
 }
 
 function destroy() {
+  if (shouldRun === false) {
+    console.warn("fairy dust is not attached!");
+  }
   stop();
 }
 

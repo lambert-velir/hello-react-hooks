@@ -14,7 +14,7 @@ export default function useMouseDown() {
       window.removeEventListener("mousedown", handleMouseDown);
       window.removeEventListener("mouseup", handleMouseUp);
     };
-  });
+  }, []);
 
   return isMouseDown;
 }

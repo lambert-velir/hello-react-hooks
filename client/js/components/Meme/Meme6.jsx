@@ -6,7 +6,6 @@ const propTypes = {};
 
 const Meme = props => {
   const [topText, setTopText] = useState(localStorage.getItem("topText") || "");
-
   const [bottomText, setBottomText] = useState(
     localStorage.getItem("bottomText") || ""
   );
@@ -21,9 +20,8 @@ const Meme = props => {
   useEffect(() => {
     if (isMouseDown) {
       fairyDustCursor.init();
+      return () => fairyDustCursor.destroy();
     }
-
-    return () => fairyDustCursor.destroy();
   }, [isMouseDown]);
 
   return (
@@ -77,7 +75,7 @@ function useMouseDown() {
       window.removeEventListener("mousedown", handleMouseDown);
       window.removeEventListener("mouseup", handleMouseUp);
     };
-  });
+  }, []);
 
   return isMouseDown;
 }

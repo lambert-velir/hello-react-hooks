@@ -4,8 +4,7 @@ import cx from "classnames";
 const propTypes = {};
 
 const Meme = props => {
-  const [topText, setTopText] = useState("asdf");
-
+  const [topText, setTopText] = useState(localStorage.getItem("topText") || "");
   const [bottomText, setBottomText] = useState(
     localStorage.getItem("bottomText") || ""
   );
@@ -68,7 +67,7 @@ function useMouseDown() {
       window.removeEventListener("mousedown", handleMouseDown);
       window.removeEventListener("mouseup", handleMouseUp);
     };
-  });
+  }, []);
 
   return isMouseDown;
 }

@@ -24,7 +24,7 @@ ReactDOM.render(
     {/* <Meme4 /> */}
     {/* <Meme5 /> */}
     <Meme6 />
-    <Notes />
+    {/* <Notes /> */}
     {/* <DanAbramovClass /> */}
     {/* <DanAbramovHooks1 /> */}
     {/* <DanAbramovHooks2 /> */}
