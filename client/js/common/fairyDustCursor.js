@@ -113,7 +113,7 @@ function Particle() {
     display: "block",
     pointerEvents: "none",
     "z-index": "10000000",
-    fontSize: "48px",
+    fontSize: "24px",
     "will-change": "transform"
   };
 
