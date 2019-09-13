@@ -1,0 +1,27 @@
+.temp-value {
+  padding: 5px 10px;
+  text-align: center;
+}
+
+.temp-value__label {
+  .converter--theme & {
+    text-decoration: underline;
+  }
+}
+
+.temp-value__value {
+  font-size: 48px;
+  font-weight: bold;
+
+  button {
+    margin: 0 12px;
+    padding: 0;
+
+    color: inherit;
+    font-size: 18px;
+    font-weight: bold;
+
+    background: none;
+    border: 0;
+  }
+}

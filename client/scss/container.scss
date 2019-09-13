@@ -1,0 +1,11 @@
+.container {
+  // display: flex;
+
+  > * {
+    margin: 25vh 0 100vh;
+
+    &:last-child {
+      margin-bottom: 50vh;
+    }
+  }
+}

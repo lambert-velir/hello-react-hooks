@@ -6,7 +6,8 @@ export default class DanAbramovClass extends React.Component {
 
     this.state = {
       firstName: "Harry",
-      lastName: "Potter"
+      lastName: "Potter",
+      windowWidth: window.innerWidth
     };
 
     this.handleFirstNameChange = this.handleFirstNameChange.bind(this);
