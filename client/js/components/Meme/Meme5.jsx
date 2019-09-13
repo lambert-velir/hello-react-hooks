@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import cx from "classnames";
 
-const propTypes = {};
-
 const Meme = props => {
   const [topText, setTopText] = useState(localStorage.getItem("topText") || "");
   const [bottomText, setBottomText] = useState(
@@ -50,7 +48,6 @@ const Meme = props => {
   );
 };
 
-Meme.propTypes = propTypes;
 export default Meme;
 
 function useMouseDown() {

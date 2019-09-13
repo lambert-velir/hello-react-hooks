@@ -3,7 +3,6 @@ import React from "react";
 const Notes = props => {
   return (
     <div>
-      REDO RENDER PROP SLIDE TO NOT USE ROUTE!!!
       <h2>Dan Abromov in video</h2>
       <ol>
         <li>
@@ -18,7 +17,8 @@ const Notes = props => {
           </strike>
         </li>
         <li>
-          3. <strong>useEffect - no cleanup</strong> - update document title
+          3. <strong>useEffect - no cleanup</strong> - update document
+          title
         </li>
         <li>
           4. <strong>useEffect - cleanup</strong> - use window width
@@ -27,7 +27,8 @@ const Notes = props => {
           5. <strong>custom hook</strong> - useWindowWidth
         </li>
         <li>
-          6. <strong>custom hook with params</strong> - useDocumentTitle
+          6. <strong>custom hook with params</strong> -
+          useDocumentTitle
         </li>
         <li>
           <strong>custom hook with params</strong> - useFormInput
@@ -42,26 +43,31 @@ const Notes = props => {
           2. <strong>2nd useState</strong> - store scale, swap button
         </li>
         <li>
-          2.5<strong>rules of hooks slide</strong>
+          2.1<strong>rules of hooks slide</strong>
         </li>
         <li>
           3.<strong>useContext</strong> ThemeContext
         </li>
         <li>
-          3.5<strong>useEffect - no cleanup</strong> - update document title
+          3.1<strong>useEffect - no cleanup</strong> - update document
+          title (no dependency array yet)
         </li>
         <li>
           4. <strong>useEffect - cleanup</strong>
           <br />- use window width
           <br />- demostrate the need for empty dependency array
-          <br />- show that document title useEffect should have dependency
-          array
+          <br />- show that document title useEffect should have
+          dependency array
+          <br />- illustrate that the dep array is just like the
+          contents of a DOM element
         </li>
+
         <li>
           5. <strong>custom hook</strong> - useWindowWidth
         </li>
         <li>
-          6. <strong>custom hook with params</strong> - useDocumentTitle
+          6. <strong>custom hook with params</strong> -
+          useDocumentTitle
         </li>
       </ol>
       <h2>Meme App</h2>
@@ -73,7 +79,8 @@ const Notes = props => {
           2. <strong>2nd useState</strong> - Bottom text input
         </li>
         <li>
-          3. <strong>useEffect - no cleanup</strong> - Save to localStorage
+          3. <strong>useEffect - no cleanup</strong> - Save to
+          localStorage
         </li>
         <li>
           4. <strong>useEffect - cleanup</strong> - is mouse down
@@ -83,8 +90,8 @@ const Notes = props => {
           5. <strong>custom hook</strong> - useMouseDown
         </li>
         <li>
-          6. <strong>useEffect with dependency array</strong> - fairy dust on
-          mouse down
+          6. <strong>useEffect with dependency array</strong> - fairy
+          dust on mouse down
         </li>
       </ol>
       {/* <h2>Ideas</h2>

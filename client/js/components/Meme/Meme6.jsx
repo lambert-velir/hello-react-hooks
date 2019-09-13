@@ -2,20 +2,20 @@ import React, { useEffect, useState } from "react";
 import cx from "classnames";
 import fairyDustCursor from "../../common/fairyDustCursor.js";
 
-const propTypes = {};
-
 const Meme = props => {
-  const [topText, setTopText] = useState(localStorage.getItem("topText") || "");
+  const [topText, setTopText] = useState(
+    localStorage.getItem("topText") || ""
+  );
   const [bottomText, setBottomText] = useState(
     localStorage.getItem("bottomText") || ""
   );
+
+  const isMouseDown = useMouseDown();
 
   useEffect(() => {
     localStorage.setItem("topText", topText);
     localStorage.setItem("bottomText", bottomText);
   }, [bottomText, topText]);
-
-  const isMouseDown = useMouseDown();
 
   useEffect(() => {
     if (isMouseDown) {
@@ -23,6 +23,14 @@ const Meme = props => {
       return () => fairyDustCursor.destroy();
     }
   }, [isMouseDown]);
+
+  function handleTopTextChange(e) {
+    setTopText(e.target.value);
+  }
+
+  function handleBottomTextChange(e) {
+    setBottomText(e.target.value);
+  }
 
   return (
     <div className="meme-editor">
@@ -32,7 +40,7 @@ const Meme = props => {
           <input
             type="text"
             value={topText}
-            onChange={e => setTopText(e.target.value)}
+            onChange={handleTopTextChange}
           />
         </label>
         <label>
@@ -40,7 +48,7 @@ const Meme = props => {
           <input
             type="text"
             value={bottomText}
-            onChange={e => setBottomText(e.target.value)}
+            onChange={handleBottomTextChange}
           />
         </label>
       </div>
@@ -58,7 +66,6 @@ const Meme = props => {
   );
 };
 
-Meme.propTypes = propTypes;
 export default Meme;
 
 function useMouseDown() {
@@ -67,7 +74,6 @@ function useMouseDown() {
   useEffect(() => {
     const handleMouseDown = e => setIsMouseDown(true);
     const handleMouseUp = e => setIsMouseDown(false);
-
     window.addEventListener("mousedown", handleMouseDown);
     window.addEventListener("mouseup", handleMouseUp);
 
@@ -75,7 +81,7 @@ function useMouseDown() {
       window.removeEventListener("mousedown", handleMouseDown);
       window.removeEventListener("mouseup", handleMouseUp);
     };
-  }, []);
+  });
 
   return isMouseDown;
 }

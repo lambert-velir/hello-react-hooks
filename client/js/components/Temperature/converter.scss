@@ -12,6 +12,11 @@
 
   &.converter--vertical {
     flex-direction: column;
+    padding: 10px 0;
+
+    .converter__swap {
+      margin: 10px 0;
+    }
   }
 
   &.converter--hooks {

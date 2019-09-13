@@ -1,8 +1,4 @@
-import React, {
-  useContext,
-  useEffect,
-  useState
-} from "react";
+import React, { useContext, useEffect, useState } from "react";
 import TempValue from "./TempValue.jsx";
 import SwapButton from "./SwapButton.jsx";
 import { ThemeContext } from "./context.jsx";
@@ -16,41 +12,22 @@ import {
 
 const Temperature = props => {
   const [temp, setTemp] = useState(0);
-  const [scale, setScale] = useState(
-    CELCIUS
-  );
-  const theme = useContext(
-    ThemeContext
-  );
+  const [scale, setScale] = useState(CELCIUS);
+  const theme = useContext(ThemeContext);
 
-  const change =
-    scale === CELCIUS ? 5 : 9;
+  const change = scale === CELCIUS ? 5 : 9;
 
   useEffect(() => {
-    document.title = summaryString(
-      scale,
-      temp
-    );
-  });
+    document.title = summaryString(scale, temp);
+  }, [scale, temp]);
 
-  const [width, setWidth] = useState(
-    window.innerWidth
-  );
+  const [width, setWidth] = useState(window.innerWidth);
   useEffect(() => {
-    const handleResize = e => {
-      setWidth(window.innerWidth);
-    };
-    window.addEventListener(
-      "resize",
-      handleResize
-    );
+    const handleResise = e => setWidth(window.innerWidth);
+    window.addEventListener("resize", handleResise);
 
-    return () =>
-      window.removeEventListener(
-        "resize",
-        handleResize
-      );
-  });
+    return () => window.removeEventListener("resize", handleResise);
+  }, []);
 
   function handleDownClick(e) {
     setTemp(temp - change);
@@ -61,42 +38,23 @@ const Temperature = props => {
   }
 
   function handleSwapClick(e) {
-    setTemp(convert(scale, temp));
     setScale(otherScale(scale));
+    setTemp(convert(scale, temp));
   }
 
   return (
     <div
-      className={cx(
-        "converter",
-        theme,
-        {
-          "converter--vertical":
-            width < 520
-        }
-      )}
+      className={cx("converter", theme, {
+        "converter--vertical": width < 520
+      })}
     >
       <TempValue label={scale}>
-        <button
-          type="button"
-          onClick={handleDownClick}
-        >
-          -{change}
-        </button>
+        <button onClick={handleDownClick}>-{change}</button>
         {temp}
-        <button
-          type="button"
-          onClick={handleUpClick}
-        >
-          +{change}
-        </button>
+        <button onClick={handleUpClick}>+{change}</button>
       </TempValue>
-      <SwapButton
-        onClick={handleSwapClick}
-      />
-      <TempValue
-        label={otherScale(scale)}
-      >
+      <SwapButton onClick={handleSwapClick} />
+      <TempValue label={otherScale(scale)}>
         {convert(scale, temp)}
       </TempValue>
     </div>

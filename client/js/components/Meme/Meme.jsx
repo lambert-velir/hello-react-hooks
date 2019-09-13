@@ -1,7 +1,5 @@
 import React from "react";
 
-const propTypes = {};
-
 const Meme = props => {
   return (
     <div className="meme-editor">
@@ -24,5 +22,4 @@ const Meme = props => {
   );
 };
 
-Meme.propTypes = propTypes;
 export default Meme;

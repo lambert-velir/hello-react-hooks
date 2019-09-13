@@ -4,7 +4,7 @@ const propTypes = {};
 
 const SwapButton = props => {
   return (
-    <div className="convert__swap">
+    <div className="converter__swap">
       <button type="button" {...props}>
         <svg
           xmlns="http://www.w3.org/2000/svg"

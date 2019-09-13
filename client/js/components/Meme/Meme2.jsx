@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 
-const propTypes = {};
-
 const Meme = props => {
   const [topText, setTopText] = useState("");
   const [bottomText, setBottomText] = useState("");
@@ -40,5 +38,4 @@ const Meme = props => {
   );
 };
 
-Meme.propTypes = propTypes;
 export default Meme;

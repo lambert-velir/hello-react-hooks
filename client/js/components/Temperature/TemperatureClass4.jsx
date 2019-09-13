@@ -7,148 +7,90 @@ import {
   otherScale,
   summaryString
 } from "./temperatureScale.js";
-import cx from "classnames";
 import { ThemeContext } from "./context.jsx";
+import cx from "classnames";
 
 export default class Temperature extends React.Component {
   constructor(props) {
     super(props);
+
+    this.handleDownClick = this.handleDownClick.bind(this);
+    this.handleUpClick = this.handleUpClick.bind(this);
+    this.handleSwapChange = this.handleSwapChange.bind(this);
+    this.handleResize = this.handleResize.bind(this);
+
     this.state = {
       temp: 0,
       scale: CELCIUS,
       width: window.innerWidth
     };
-    this.handleDownClick = this.handleDownClick.bind(
-      this
-    );
-    this.handleUpClick = this.handleUpClick.bind(
-      this
-    );
-    this.handleSwapClick = this.handleSwapClick.bind(
-      this
-    );
-    this.handleResize = this.handleResize.bind(
-      this
-    );
   }
 
   componentDidMount() {
-    document.title = summaryString(
-      this.state.scale,
-      this.state.temp
-    );
-    window.addEventListener(
-      "resize",
-      this.handleResize
-    );
+    document.title = summaryString(this.state.scale, this.state.temp);
+
+    window.addEventListener("resize", this.handleResize);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.handleResize);
   }
 
   componentDidUpdate() {
-    document.title = summaryString(
-      this.state.scale,
-      this.state.temp
-    );
+    document.title = summaryString(this.state.scale, this.state.temp);
   }
 
-  compoentWillUnmount() {
-    window.removeEventListener(
-      "resize",
-      this.handleResize
-    );
+  getChange() {
+    return this.state.scale === CELCIUS ? 5 : 9;
   }
 
-  handleResize() {
+  handleResize(e) {
     this.setState({
       width: window.innerWidth
     });
   }
 
   handleDownClick(e) {
-    const change =
-      this.state.scale === CELCIUS
-        ? 5
-        : 9;
     this.setState({
-      temp: this.state.temp - change
+      temp: this.state.temp - this.getChange()
     });
   }
 
   handleUpClick(e) {
-    const change =
-      this.state.scale === CELCIUS
-        ? 5
-        : 9;
     this.setState({
-      temp: this.state.temp + change
+      temp: this.state.temp + this.getChange()
     });
   }
 
-  handleSwapClick(e) {
+  handleSwapChange(e) {
     this.setState({
-      temp: convert(
-        this.state.scale,
-        this.state.temp
-      ),
-      scale: otherScale(
-        this.state.scale
-      )
+      scale: otherScale(this.state.scale),
+      temp: convert(this.state.scale, this.state.temp)
     });
   }
 
   render() {
-    const change =
-      this.state.scale === CELCIUS
-        ? 5
-        : 9;
-
     return (
       <ThemeContext.Consumer>
         {theme => {
           return (
             <div
-              className={cx(
-                "converter",
-                theme,
-                {
-                  "converter--vertical":
-                    this.state.width <
-                    520
-                }
-              )}
+              className={cx("converter", theme, {
+                "converter--vertical": this.state.width < 520
+              })}
             >
-              <TempValue
-                label={this.state.scale}
-              >
-                <button
-                  onClick={
-                    this.handleDownClick
-                  }
-                >
-                  -{change}
+              <TempValue label={this.state.scale}>
+                <button onClick={this.handleDownClick}>
+                  -{this.getChange()}
                 </button>
                 {this.state.temp}
-                <button
-                  onClick={
-                    this.handleUpClick
-                  }
-                >
-                  +{change}
+                <button onClick={this.handleUpClick}>
+                  +{this.getChange()}
                 </button>
               </TempValue>
-              <SwapButton
-                onClick={
-                  this.handleSwapClick
-                }
-              />
-              <TempValue
-                label={otherScale(
-                  this.state.scale
-                )}
-              >
-                {convert(
-                  this.state.scale,
-                  this.state.temp
-                )}
+              <SwapButton onClick={this.handleSwapChange} />
+              <TempValue label={otherScale(this.state.scale)}>
+                {convert(this.state.scale, this.state.temp)}
               </TempValue>
             </div>
           );
