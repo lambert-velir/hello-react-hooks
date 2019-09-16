@@ -1,7 +1,5 @@
 .container {
-  // display: flex;
-
-  overflow: auto; // preven margins from overflowing
+  overflow: auto; // prevent margins from overflowing
 
   > * {
     margin: 25vh 0 100vh;
