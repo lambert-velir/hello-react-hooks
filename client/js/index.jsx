@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import Notes from "./components/Notes/Notes.jsx";
+// import Notes from "./components/Notes/Notes.jsx";
 // import DanAbramovClass from "./components/DanAbramov/DanAbramovClass.jsx";
 // import DanAbramovHooks1 from "./components/DanAbramov/DanAbramovHooks1.jsx";
 // import DanAbramovHooks2 from "./components/DanAbramov/DanAbramovHooks2.jsx";

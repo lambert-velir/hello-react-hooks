@@ -48,13 +48,14 @@ const Notes = props => {
         </li>
         <li>
           <strong>useEffect - cleanup</strong>
-          <br />- use window width
+          <br />- story window width and use to add
+          converter--vertical &lt; 520
+          <br />- show classnames package
           <br />- demostrate the need for empty dependency array
           <br />- show that document title useEffect should have
           dependency array
           <br />- illustrate that the dep array is just like the
           contents of a DOM element
-          <br />- show classnames package
         </li>
 
         <li>
