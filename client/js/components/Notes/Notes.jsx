@@ -6,29 +6,28 @@ const Notes = props => {
       <h2>Dan Abromov in video</h2>
       <ol>
         <li>
-          1. <strong>useState</strong> - make firstname controlled
+          <strong>useState</strong> - make firstname controlled
         </li>
         <li>
-          2. <strong>2nd useState</strong> - make lastname controlled
+          <strong>2nd useState</strong> - make lastname controlled
         </li>
         <li>
           <strike>
-            3. <strong>useContext</strong> - demostrates render props
+            <strong>useContext</strong> - demostrates render props
           </strike>
-        </li>
-        <li>
-          3. <strong>useEffect - no cleanup</strong> - update document
+          <br />
+          <strong>useEffect - no cleanup</strong> - update document
           title
         </li>
+
         <li>
-          4. <strong>useEffect - cleanup</strong> - use window width
+          <strong>useEffect - cleanup</strong> - use window width
         </li>
         <li>
-          5. <strong>custom hook</strong> - useWindowWidth
+          <strong>custom hook</strong> - useWindowWidth
         </li>
         <li>
-          6. <strong>custom hook with params</strong> -
-          useDocumentTitle
+          <strong>custom hook with params</strong> - useDocumentTitle
         </li>
         <li>
           <strong>custom hook with params</strong> - useFormInput
@@ -37,60 +36,54 @@ const Notes = props => {
       <h2>Temperature App</h2>
       <ol>
         <li>
-          1. <strong>useState</strong> - store celcius, add buttons
+          <strong>useState</strong> - store celcius, add buttons
         </li>
         <li>
-          2. <strong>2nd useState</strong> - store scale, swap button
+          <strong>2nd useState</strong> - store scale, swap button
         </li>
         <li>
-          2.1<strong>rules of hooks slide</strong>
+          <strong>useEffect - no cleanup</strong>
+          <br />- first show <strong>useContext</strong> ThemeContext
+          <br />- update document title (no dependency array yet)
         </li>
         <li>
-          3.<strong>useContext</strong> ThemeContext
-        </li>
-        <li>
-          3.1<strong>useEffect - no cleanup</strong> - update document
-          title (no dependency array yet)
-        </li>
-        <li>
-          4. <strong>useEffect - cleanup</strong>
+          <strong>useEffect - cleanup</strong>
           <br />- use window width
           <br />- demostrate the need for empty dependency array
           <br />- show that document title useEffect should have
           dependency array
           <br />- illustrate that the dep array is just like the
           contents of a DOM element
+          <br />- show classnames package
         </li>
 
         <li>
-          5. <strong>custom hook</strong> - useWindowWidth
-        </li>
-        <li>
-          6. <strong>custom hook with params</strong> -
-          useDocumentTitle
+          <strong>Custom hooks</strong>
+          <br /> - useWindowWidth
+          <br />- with params, useDocumentTitle
         </li>
       </ol>
       <h2>Meme App</h2>
       <ol>
         <li>
-          1. <strong>useState</strong> - Top text input
+          <strong>useState</strong> - Top text input
         </li>
         <li>
-          2. <strong>2nd useState</strong> - Bottom text input
+          <strong>2nd useState</strong> - Bottom text input
         </li>
         <li>
-          3. <strong>useEffect - no cleanup</strong> - Save to
+          <strong>useEffect - no cleanup</strong> - Save to
           localStorage
         </li>
         <li>
-          4. <strong>useEffect - cleanup</strong> - is mouse down
+          <strong>useEffect - cleanup</strong> - is mouse down
           (useState/useEffect)
         </li>
         <li>
-          5. <strong>custom hook</strong> - useMouseDown
+          <strong>custom hook</strong> - useMouseDown
         </li>
         <li>
-          6. <strong>useEffect with dependency array</strong> - fairy
+          <strong>useEffect with dependency array</strong> - fairy
           dust on mouse down
         </li>
       </ol>

@@ -8,7 +8,7 @@ import {
   summaryString
 } from "./temperatureScale.js";
 import cx from "classnames";
-import { ThemeContext } from "./context.jsx";
+import ThemeContext from "./ThemeContext.jsx";
 
 export default class Temperature extends React.Component {
   constructor(props) {

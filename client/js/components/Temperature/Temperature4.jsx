@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import TempValue from "./TempValue.jsx";
 import SwapButton from "./SwapButton.jsx";
-import { ThemeContext } from "./context.jsx";
+import ThemeContext from "./ThemeContext.jsx";
 import cx from "classnames";
 import {
   CELCIUS,

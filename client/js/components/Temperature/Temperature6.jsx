@@ -6,7 +6,7 @@ import React, {
 import SwapButton from "./SwapButton.jsx";
 import TempValue from "./TempValue.jsx";
 import cx from "classnames";
-import { ThemeContext } from "./context.jsx";
+import ThemeContext from "./ThemeContext.jsx";
 import {
   CELCIUS,
   convert,

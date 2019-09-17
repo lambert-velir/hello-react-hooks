@@ -5,7 +5,7 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-
+  flex-wrap: wrap;
   padding: 100px 0;
 
   font-family: Helvetica, sans-serif;
@@ -26,6 +26,10 @@
 
     button {
       transform: skewX(-10deg);
+    }
+
+    .temp-value__label {
+      font-size: 28px;
     }
   }
 
