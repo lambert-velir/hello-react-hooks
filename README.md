@@ -1,4 +1,4 @@
-## Hello react hooks!
+## Hello React Hooks!
 
 To run:
 
