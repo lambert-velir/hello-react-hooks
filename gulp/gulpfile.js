@@ -13,6 +13,8 @@ const createBuildTask = require("./tasks/build.js");
  * to build for prduction/jenkins:
  *    gulp build --no-watch --env production
  */
-exports.build = createBuildTask(projectRoot);
+const build = createBuildTask(projectRoot);
+build.displayName = "build";
+exports.build = build;
 
 exports.default = quench.logHelp;
